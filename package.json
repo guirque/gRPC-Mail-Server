@@ -3,14 +3,17 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon index.js",
-    "start": "node index.js"
+    "server": "node server.js",
+    "client": "node client.js",
+    "server:dev": "nodemon server.js",
+    "client:dev": "nodemon client.js"
   },
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
     "@grpc/grpc-js": "^1.12.2",
+    "@grpc/proto-loader": "^0.7.13",
     "nodemailer": "^6.9.16"
   },
   "devDependencies": {

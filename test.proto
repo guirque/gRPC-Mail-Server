@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+message value
+{
+    int64 aNum = 1;
+    bool check = 2;
+    string aha = 3;
+}
+
+service main
+{
+    rpc aMethod(value) returns (value){}
+}
