@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+message labels
+{
+    repeated string label = 1;
+}
+
+message chat
+{
+    string sender = 1;
+    string title = 2;
+    string data = 3;
+    string label = 4;
+    bool subscription = 5;
+}
+
+service main
+{
+    rpc createLabel(labels) returns (labels){}
+    rpc requestLabels(labels) returns (labels){}
+    rpc bidirectional(stream chat) returns (stream chat){}
+}
