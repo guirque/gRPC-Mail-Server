@@ -19,9 +19,9 @@ let mainService = protoDescriptor.main;
 
 // Method Implementations ///////////////////////////////////////////////////////////////////////
 
-function aMethod(value, callback)
+function aMethod(call, callback)
 {
-    console.log('aMethod executing', value.request);
+    console.log('aMethod executing', call.request);
     const a = 
     {
         aNum: 10,
@@ -32,12 +32,28 @@ function aMethod(value, callback)
     callback(null, a);
 }
 
+let i = 0;
+function bidirectional(call)
+{
+    call.on('data', (res)=>
+        {
+            console.log(`Server received:`, res.data);
+            call.write({data: `Server received your message (${res.data})`});
+            i++;
+            if(i == 3)
+            {
+                call.end();
+            }
+        })
+}
+
 // Setting Up Server ////////////////////////////////////////////////////////////////////////////
 const server = new grpc.Server();
 
 // Adding services and corresponding method implementations
 server.addService(mainService.service, {
-    aMethod
+    aMethod,
+    bidirectional
   });
 
 // Exporting ////////////////////////////////////////////////////////////////////////////////////
