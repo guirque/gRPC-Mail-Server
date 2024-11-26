@@ -1,3 +1,5 @@
+const prompt = require('prompt-sync')();
+
 // Função para exibir o menu
 function exibirMenu() {
     console.log("\n=== Menu ===");
@@ -10,34 +12,35 @@ function exibirMenu() {
 
 // Função principal
 function menu() {
-    let opcao;
 
+    let ultimaOpcao = -1;
     do {
         exibirMenu();
-        opcao = parseInt(prompt("Escolha uma opção:"));
+        let opcao = parseInt(prompt('Escolha uma opção: '));
+            ultimaOpcao = opcao;
 
-        switch (opcao) {
-            case 1:
-                console.log("Tópicos disponíveis:");
-                break;
+            switch (opcao) {
+                case 1:
+                    let topicoDeEscolha = prompt('Digite o nome do tópico: ');
+                    break;
+    
+                case 2:
+                    let novoTopico = prompt('Digite o nome do novo tópico: ');
+                    break;
+    
+                case 3:
+                    console.log("Tópicos disponíveis:");
+                    break;
+    
+                case 4:
+                    let mensagem = prompt('Digite a mensagem para enviar a todos os tópicos: ');
+                    break;
 
-            case 2:
-                let novoTopico = prompt("Digite o nome do novo tópico:");
-                break;
-
-            case 3:
-                console.log("Tópicos disponíveis:");
-                break;
-
-            case 4:
-                let mensagem = prompt("Digite a mensagem para enviar a todos os tópicos:");
-                break;
-
-            case 0:
-                console.log("Saindo...");
-                break;
-        }
-    } while (opcao !== 0);
+                default:
+                    console.log("Saindo...");
+                    break;
+            }
+    } while (ultimaOpcao !== 0);
 }
 
 menu();
